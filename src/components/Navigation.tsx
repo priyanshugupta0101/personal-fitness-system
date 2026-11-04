@@ -39,12 +39,12 @@ interface SidebarProps {
 
 export function Sidebar({ active, onChange }: SidebarProps) {
   return (
-    <aside className="hidden w-60 shrink-0 flex-col border-r border-slate-200 p-4 dark:border-white/10 lg:flex">
-      <div className="mb-8 flex items-center gap-2 px-2">
+    <aside className="sticky top-0 hidden h-screen w-20 shrink-0 flex-col border-r border-slate-200 p-3 dark:border-white/10 md:flex lg:w-60 lg:p-4">
+      <div className="mb-8 flex items-center justify-center gap-2 lg:justify-start lg:px-2">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-solo-600 text-white shadow-glow">
           <Swords size={18} />
         </div>
-        <div>
+        <div className="hidden lg:block">
           <p className="font-display text-lg font-black leading-none tracking-wide">AETHER</p>
           <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">Solo System</p>
         </div>
@@ -57,14 +57,16 @@ export function Sidebar({ active, onChange }: SidebarProps) {
             <button
               key={item.key}
               onClick={() => onChange(item.key)}
-              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
+              title={item.label}
+              aria-label={item.label}
+              className={`flex items-center justify-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 lg:justify-start ${
                 isActive
                   ? 'bg-solo-600 text-white shadow-glow'
                   : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/5'
               }`}
             >
               <Icon size={18} />
-              {item.label}
+              <span className="hidden lg:inline">{item.label}</span>
             </button>
           );
         })}
@@ -100,7 +102,7 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 z-40 flex items-stretch border-t border-slate-200 bg-white/90 px-1 py-1.5 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/90 lg:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 flex items-stretch border-t border-slate-200 bg-white/90 px-1 py-1.5 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/90 md:hidden">
         {primaryItems.map((item) => {
           const Icon = item.icon;
           const isActive = active === item.key;
@@ -137,7 +139,7 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
       {/* Expanded menu panel — slides up above the bar */}
       {menuOpen && (
         <div
-          className="fixed bottom-[52px] left-1/2 z-50 w-[calc(100%-1rem)] max-w-sm -translate-x-1/2 animate-rise lg:hidden"
+          className="fixed bottom-[52px] left-1/2 z-50 w-[calc(100%-1rem)] max-w-sm -translate-x-1/2 animate-rise md:hidden"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="card-glass rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-xl dark:border-white/10 dark:bg-slate-900/95">

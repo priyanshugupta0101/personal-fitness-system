@@ -77,7 +77,7 @@ export function PhotosView({ photos, onChanged }: PhotosProps) {
           action={<Button onClick={() => setOpen(true)}><Plus size={16} /> Add Photo</Button>}
         />
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {sorted.map((p) => (
             <Card key={p.id} className="group overflow-hidden p-0">
               <div className="relative aspect-square overflow-hidden rounded-t-2xl bg-slate-200 dark:bg-white/5">

@@ -56,7 +56,7 @@ export function BadgesView({ earned, customBadges, onChanged }: BadgesProps) {
             <p className="text-sm text-slate-400">No custom badges yet. Create your own with a custom unlock condition.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {customBadges.map((badge) => (
               <CustomBadgeCard key={badge.id} badge={badge} isEarned={earnedSet.has(badge.id)} earned={earned} onDelete={onChanged} />
             ))}
@@ -73,7 +73,7 @@ function BadgeSection({ title, badges, earnedSet, earned }: { title: string; bad
   return (
     <div>
       <h3 className="quest-rune mb-3 text-xs text-slate-500">{title}</h3>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {badges.map((badge) => {
           const isEarned = earnedSet.has(badge.id);
           const earnedRow = earned.find((e) => e.badge_id === badge.id);

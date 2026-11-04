@@ -154,10 +154,10 @@ function AppInner() {
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
       <div className="mx-auto flex min-h-screen max-w-6xl">
         <Sidebar active={tab} onChange={setTab} />
-        <main className="flex-1 overflow-x-hidden px-4 pb-24 pt-6 lg:pb-8 lg:pl-8">
-          <div className="mx-auto max-w-2xl">
+        <main className="flex-1 overflow-x-hidden px-4 pb-24 pt-6 sm:px-6 md:pb-8 lg:px-8">
+          <div className="mx-auto max-w-2xl md:max-w-3xl xl:max-w-4xl">
             {/* Mobile header */}
-            <div className="mb-5 flex items-center justify-between lg:hidden">
+            <div className="mb-5 flex items-center justify-between md:hidden">
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-solo-600 text-white">
                   <LucideIcons.Swords size={16} />
