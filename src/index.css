@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: 'Cinzel', serif;
+}
+
+@layer components {
+  .card-glass {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+  .dark .card-glass {
+    @apply border-white/10 bg-white/[0.04];
+  }
+  .light .card-glass {
+    @apply border-slate-200/80 bg-white/80 shadow-sm;
+  }
+  .quest-rune {
+    @apply font-display tracking-widest uppercase;
+  }
+}
+
+.exp-bar-fill {
+  background: linear-gradient(90deg, #3366ff, #22d3ee, #f97316);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 140, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 140, 0.6);
+}
