@@ -26,6 +26,7 @@ import * as LucideIcons from 'lucide-react';
 function AppInner() {
   const [tab, setTab] = useState<TabKey>('home');
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [quests, setQuests] = useState<Quest[]>([]);
@@ -73,8 +74,12 @@ function AppInner() {
 
   useEffect(() => {
     (async () => {
-      await seedDefaultData();
-      await loadAll();
+      try {
+        await seedDefaultData();
+        await loadAll();
+      } catch {
+        setLoadFailed(true);
+      }
       setLoading(false);
     })();
   }, [loadAll]);
@@ -117,12 +122,29 @@ function AppInner() {
   const todaySleep = useMemo(() => sleepHistory.find((s) => s.date === today) ?? null, [sleepHistory, today]);
   const todayRecovery = useMemo(() => recoveryHistory.find((r) => r.date === today) ?? null, [recoveryHistory, today]);
 
-  if (loading || !profile) {
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-pulseGlow rounded-xl bg-solo-600" />
           <p className="font-display text-sm uppercase tracking-[0.4em] text-slate-400">Awakening System...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 p-6 dark:bg-slate-950">
+        <div className="card-glass max-w-sm rounded-2xl p-6 text-center">
+          <LucideIcons.CloudOff size={36} className="mx-auto mb-3 text-amber-500" />
+          <p className="font-display text-lg font-bold">Connection Lost</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            {loadFailed || !isSupabaseConfigured
+              ? 'The system could not reach your data. Check that the app connection settings are in place, then try again.'
+              : 'Your profile could not be loaded. Please try again.'}
+          </p>
+          <Button className="mt-5" onClick={() => window.location.reload()}>Try Again</Button>
         </div>
       </div>
     );
